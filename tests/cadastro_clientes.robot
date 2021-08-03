@@ -39,6 +39,10 @@ Telefone é Obrigatório
     [Template]      Validação de Campos
     Diego Cardoso       15799329082     Rua dos Bugs, 1000      ${EMPTY}     Telefone é obrigatório
 
+Telefone incorreto
+    [Template]      Validação de Campos
+    Joao da Silva   0000001406      Rua dos Bugs, 1000      1199999999      Telefone inválido     
+
 ***Keywords***
 Validação de Campos
     [Arguments]     ${nome}    ${cpf}    ${endereco}    ${telefone}    ${saida} 
