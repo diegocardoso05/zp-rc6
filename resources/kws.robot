@@ -16,10 +16,9 @@ Devo ver um toaster com a mensagem
 
     Wait Until Element Contains     ${TOASTER_ERROR_P}       ${expect_message}
 
-## Custumers
+## Save Custumers
 Dado que acesso o formulário de cadastro de clientes
-    Wait Until Element Is Visible       ${NAV_CUSTOMERS}      5       
-    Click Element                       ${NAV_CUSTOMERS}
+    Go To Customers
     Wait Until Element Is Visible       ${CUSTOMERS_FORM}       5
     Click Element                       ${CUSTOMERS_FORM}
 
@@ -58,4 +57,33 @@ Então devo ver mensagens informando que os campos do cadastro de clientes são 
 Então devo ver o texto:
     [Arguments]     ${expect_text}
 
-    Wait Until Page Contains        ${expect_text}      5     
+    Wait Until Page Contains        ${expect_text}      5 
+
+E esse deve ser exibido na lista
+    ${cpf_formatado}=           Format Cpf      ${cpf}
+    Go Back
+    Wait Until Element Is Visible       ${CUSTOMERS_LIST}       5       
+    Table Should Contain                ${CUSTOMERS_LIST}       ${cpf_formatado}   
+
+## Remove Customer
+Dado que eu tenho um cliente indesejado:
+    [Arguments]         ${nome}    ${cpf}    ${endereco}    ${phone_number}
+
+    Remove Customer By cpf         ${cpf}
+    Insert Customer                ${nome}    ${cpf}    ${endereco}    ${phone_number}
+
+    Set Test Variable              ${cpf}  
+
+E acesso a lista de clientes
+    Go To Customers
+
+Quando eu removo esse cliente
+    # Format Cpf é a KW que representa o método no arquivo db.py
+    ${cpf_formatado}=       Format Cpf      ${cpf}
+    Set Test Variable       ${cpf_formatado}      
+
+    Go To Customer Details      ${cpf_formatado}
+    Click Remove Customer
+
+E esse cliente não deve aparecer na lista
+    Wait Until Page Does Not Contain      ${cpf_formatado} 
