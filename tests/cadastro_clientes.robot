@@ -8,11 +8,21 @@ Suite Teardown       Finish Session
 
 ***Test Cases***
 Novo cliente
+    [Tags]      smoke
     Dado que acesso o formulário de cadastro de clientes
     E que eu tenho o seguinte cliente:
     ...     Bon Jovi        00000001406     Rua dos Bugs, 1000      11999999999
     Quando faço a inclusão desse cliente
     Então devo ver a notificação:   Cliente cadastrado com sucesso!
+
+Cliente duplicado
+    [Tags]      dup
+    Dado que acesso o formulário de cadastro de clientes
+    E que eu tenho o seguinte cliente:
+    ...     Adrian Smith        000000014141     Rua dos Bugs, 2000      11999999991
+    Mas este cpf já existe no sistema
+    Quando faço a inclusão desse cliente
+    Então devo ver a notificação de erro:   Este CPF já existe no sistema! 
 
 Campos Obrigatórios
     Dado que acesso o formulário de cadastro de clientes
