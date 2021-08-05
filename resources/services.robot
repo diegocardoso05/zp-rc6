@@ -42,6 +42,17 @@ Post Customer
 
     [return]        ${resp}
 
+## Get /customers
+Get Customers
+    Create Session      zp-api      ${base_api_url}
+
+    ${token}=       Get Session Token
+    &{headers}=     Create Dictionary       Content-Type=application/json       Authorization=${token}
+
+    ${resp}=        GET On Session     zp-api      /customers      headers=${headers}
+
+    [return]        ${resp}
+
 ## DELETE /customers
 Delete Customer
     [Arguments]     ${cpf}
