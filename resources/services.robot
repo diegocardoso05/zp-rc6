@@ -2,7 +2,9 @@
 Documentation       Camade de serviços do projeto de automação
 
 Library     RequestsLibrary
-Resource    helpers.robot   
+Library     Collections
+Resource    helpers.robot
+  
 
 ***Variables***
 ${base_api_url}     http://zepalheta-api:3333
@@ -42,6 +44,19 @@ Post Customer
 
     [return]        ${resp}
 
+## PUT /customers
+Put Customer
+    [Arguments]     ${payload}      ${user_id} 
+
+    Create Session      zp-api      ${base_api_url}
+
+    ${token}=       Get Session Token   
+    &{headers}=     Create Dictionary       content-type=application/json       authorization=${token}
+
+    ${resp}     PUT On Session     zp-api      /customers/${user_id}     json=${payload}     headers=${headers}      expected_status=anything
+
+    [return]        ${resp}
+
 ## Get /customers
 Get Customers
     Create Session      zp-api      ${base_api_url}
@@ -53,6 +68,18 @@ Get Customers
 
     [return]        ${resp}
 
+Get Unique Customer
+    [Arguments] 	${user_id}
+
+    Create Session      zp-api      ${base_api_url}
+
+    ${token}=       Get Session Token
+    &{headers}=     Create Dictionary       Content-Type=application/json       Authorization=${token}
+
+    ${resp}=        GET On Session     zp-api      /customers/${user_id}      headers=${headers}        expected_status=anything
+
+    [return]        ${resp}
+
 ## DELETE /customers
 Delete Customer
     [Arguments]     ${cpf}
@@ -60,4 +87,6 @@ Delete Customer
     ${token}=       Get Session Token   
     &{headers}=     Create Dictionary       content-type=application/json       authorization=${token}
 
-    DELETE On Session     zp-api      /customers/${cpf}       headers=${headers}     expected_status=204
+    ${resp}=        DELETE On Session     zp-api      /customers/${cpf}       headers=${headers}     expected_status=anything
+
+    [Return]        ${resp}
