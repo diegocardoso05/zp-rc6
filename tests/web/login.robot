@@ -6,7 +6,8 @@ Resource        ../../resources/base.robot
 # executa uma ou mais Keywords antes da execução de todos os steps de cada caso de teste
 Test Setup          Start Session
 # executa uma ou mais Keywords apos a execução de todos os steps de cada caso de teste
-Test Teardown       Finish Session
+Suite Teardown      Finish Session
+Test Teardown       Finish TestCase
 
 ***Test Cases***
 Login do Administrador

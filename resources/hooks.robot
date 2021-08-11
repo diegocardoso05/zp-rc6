@@ -1,7 +1,16 @@
 ***Keywords***
 Start Session
-    Open Browser    about:blank      chrome
-    Maximize Browser Window
+
+    Run Keyword If      "${browser}" == "headless"
+    ...     Open Chrome Headless
+
+    Run Keyword If      "${browser}" == "chrome"
+    ...     Opem Chrome
+
+    Set Window Size     1440    900
+
+Finish TestCase
+    Capture Page Screenshot
 
 Finish Session
     Close Browser
@@ -12,3 +21,9 @@ Login Session
     Go To       ${base_url}
     Login With  ${admin_user}  ${admin_pass}
 
+### Webdriver
+Open Chrome Headless
+    Open Browser      about:blank       headlesschrome      options=add_argument('--disable-dev-shm-usage')
+
+Opem Chrome
+    Open Browser    about:blank      chrome

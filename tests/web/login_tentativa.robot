@@ -7,6 +7,7 @@ Resource            ../../resources/base.robot
 Suite Setup          Start Session
 # executa uma ou mais Keywords uma única vez apos finalizar os caso de teste
 Suite Teardown       Finish Session
+Test Teardown        Finish TestCase
 
 Test Template       Tentativa de login
 
