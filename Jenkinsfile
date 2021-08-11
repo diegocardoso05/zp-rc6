@@ -19,7 +19,7 @@ pipeline {
         }
         stage('UI Tests') {
             steps {
-                sh 'robot -d ./logs/web -v browser:headless tests/web'
+                sh 'robot -d ./logs/web -i smoke -v browser:headless tests/web'
             }
         }
     }
