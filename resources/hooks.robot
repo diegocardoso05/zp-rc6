@@ -1,3 +1,6 @@
+***Variables***
+${browser}=     chrome
+
 ***Keywords***
 Start Session
 
@@ -5,7 +8,7 @@ Start Session
     ...     Open Chrome Headless
 
     Run Keyword If      "${browser}" == "chrome"
-    ...     Opem Chrome
+    ...     Open Chrome
 
     Set Window Size     1440    900
 
@@ -25,5 +28,5 @@ Login Session
 Open Chrome Headless
     Open Browser      about:blank       headlesschrome      options=add_argument('--disable-dev-shm-usage')
 
-Opem Chrome
+Open Chrome
     Open Browser    about:blank      chrome     options=add_experimental_option('excludeSwitches', ['enable-logging'])       
